@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+            font-family: 'Segoe UI', Arial, sans-serif;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            max-width: 380px;
+            margin: 60px auto;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 6px 32px rgba(0, 0, 0, 0.10);
+            padding: 40px 32px 32px 32px;
+        }
+
+        .login-container h2 {
+            margin-bottom: 24px;
+            color: #333;
+            font-size: 2rem;
+            letter-spacing: 1px;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .login-container input[type="text"],
+        .login-container input[type="color"],
+        .login-container select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+            background: #fafafa;
+            transition: border 0.2s;
+        }
+
+        .login-container input[type="text"]:focus,
+        .login-container input[type="color"]:focus,
+        .login-container select:focus {
+            outline: none;
+            border: 1.5px solid #fda085;
+        }
+
+        .login-container button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(90deg, #fda085 0%, #f6d365 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 500;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(42, 42, 42, 0.07);
+            transition: background 0.2s;
+        }
+
+        .login-container button:hover {
+            background: linear-gradient(90deg, #f6d365 0%, #fda085 100%);
+            color: #999999;
+        }
+
+        #loginMsg {
+            margin-top: 18px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <h2>Game Launcher</h2>
+
+        <div class="form-group">
+            <label for="playerName" class="form-label">Player Name</label>
+            <input type="text" id="playerName" placeholder="Enter your name">
+        </div>
+
+        <div class="form-group">
+            <label for="color1" class="form-label">Primary Color</label>
+            <div style="display:flex;align-items:center;gap:10px;">
+                <div id="color1Preview"
+                    style="width:32px;height:32px;border-radius:6px;border:1.5px solid #ddd;background:#228B22;"></div>
+                <button type="button" id="color1Btn"
+                    style="padding:6px 14px;font-size:15px;border-radius:6px;border:1px solid #ddd;background:#242424;cursor:pointer;">Choose</button>
+                <input type="color" id="color1" value="#228B22" style="display:none;">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="color2" class="form-label">Secondary Color</label>
+            <div style="display:flex;align-items:center;gap:10px;">
+                <div id="color2Preview"
+                    style="width:32px;height:32px;border-radius:6px;border:1.5px solid #ddd;background:#FF0000;"></div>
+                <button type="button" id="color2Btn"
+                    style="padding:6px 14px;font-size:15px;border-radius:6px;border:1px solid #ddd;background:#242424;cursor:pointer;">Choose</button>
+                <input type="color" id="color2" value="#FF0000" style="display:none;">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="theme" class="form-label">Theme</label>
+            <select id="theme">
+                <option value="light">Light Theme</option>
+                <option value="dark">Dark Theme</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="gameSelect" class="form-label">Choose Game</label>
+            <select id="gameSelect">
+                <option value="snake">Snake</option>
+                <option value="chase">Chase</option>
+            </select>
+        </div>
+
+        <button id="loginBtn">Start Game</button>
+        <div id="loginMsg" style="text-align:center;color:red;"></div>
+    </div>
+</body>
+
+<script>
+    const color1Input = document.getElementById("color1");
+    const color1Preview = document.getElementById("color1Preview");
+    document.getElementById("color1Btn").addEventListener("click", () => color1Input.click());
+    color1Input.addEventListener("input", function () {
+        color1Preview.style.background = this.value;
+    });
+
+    const color2Input = document.getElementById("color2");
+    const color2Preview = document.getElementById("color2Preview");
+    document.getElementById("color2Btn").addEventListener("click", () => color2Input.click());
+    color2Input.addEventListener("input", function () {
+        color2Preview.style.background = this.value;
+    });
+
+    document.getElementById("loginBtn").addEventListener("click", function () {
+        const player = document.getElementById("playerName").value.trim();
+        const color1 = color1Input.value;
+        const color2 = color2Input.value;
+        const theme = document.getElementById("theme").value;
+        const game = document.getElementById("gameSelect").value;
+        const msg = document.getElementById("loginMsg");
+
+        new Promise((resolve, reject) => {
+            if (!player) {
+                reject("Please enter your name.");
+            } else {
+                resolve({ player, color1, color2, theme, game });
+            }
+        })
+            .then(user => {
+                msg.style.color = 'green';
+                msg.textContent = `Welcome, ${user.player}! Launching ${user.game === 'snake' ? 'Snake' : 'Chase'}...`;
+                setTimeout(() => {
+                    const params = new URLSearchParams({
+                        player: user.player,
+                        color1: user.color1,
+                        color2: user.color2,
+                        theme: user.theme
+                    }).toString();
+                    window.location.href = `${user.game}.html?${params}`;
+                }, 1200);
+            })
+            .catch(error => {
+                msg.style.color = 'red';
+                msg.textContent = error;
+            });
+    });
+</script>
+
+
+
+</html>
