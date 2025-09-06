@@ -19,7 +19,8 @@ No frameworks, no installs — just open in your browser and play!
 <img src="sample-images/index.png" alt="Apple" width="50">
 
 ### Gameplay
-![Gameplay Screenshot](c1a5a211-edf1-4871-9981-0b3117ee7fd7.png)
+<img src="sample-images/snake.png" alt="Apple" width="50">
+<img src="sample-images/chase.png" alt="Apple" width="50">
 
 ---
 
