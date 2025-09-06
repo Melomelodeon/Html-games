@@ -16,7 +16,7 @@ No frameworks, no installs — just open in your browser and play!
 ## 📸 Screenshots
 
 ### Game Launcher
-![Launcher Screenshot](f34ec908-8e61-4f76-b02d-fbc7623fe0bf.png)
+<img src="sample-images/index.png" alt="Apple" width="50">
 
 ### Gameplay
 ![Gameplay Screenshot](c1a5a211-edf1-4871-9981-0b3117ee7fd7.png)
