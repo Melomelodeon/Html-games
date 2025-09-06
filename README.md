@@ -16,11 +16,11 @@ No frameworks, no installs — just open in your browser and play!
 ## 📸 Screenshots
 
 ### Game Launcher
-<img src="sample-images/index.png" alt="Apple" height="50">
+<img src="sample-images/index.png" alt="Apple" height="20vh">
 
 ### Gameplay
-<img src="sample-images/snake.png" alt="Apple" height="50">
-<img src="sample-images/chase.png" alt="Apple" height="50">
+<img src="sample-images/snake.png" alt="Apple" height="20vh">
+<img src="sample-images/chase.png" alt="Apple" height="20vh">
 
 ---
 
